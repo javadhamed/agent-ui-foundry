@@ -1,0 +1,6 @@
+# Code owners for Elephant-Goldfish Model (EGM)
+#
+# Require maintainer review on GitHub workflow and automation config changes.
+# Normal PRs are pre-filtered by automated triage before requesting @google/egm-maintainers.
+
+.github/** @google/egm-maintainers
