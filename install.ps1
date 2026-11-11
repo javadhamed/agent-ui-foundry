@@ -26,8 +26,8 @@ if (-not (Test-Path $TargetDir)) {
 }
 
 # 2. Copy packages and core assets
-Write-Host "[2/3] Installing Foundry engines and skills..." -ForegroundColor Yellow
-$Packages = @("awesome-design-md", "elephant-goldfish-model", "hallmark", "ui-ux-pro-max-skill")
+Write-Host "[2/3] Installing Foundry UI/UX engines and skills..." -ForegroundColor Yellow
+$Packages = @("awesome-design-md", "hallmark", "ui-ux-pro-max-skill")
 
 foreach ($pkg in $Packages) {
     $src = Join-Path $ScriptDir "packages\$pkg"
@@ -53,18 +53,6 @@ if (Test-Path $GlobalSkillsDir) {
         New-Item -ItemType Junction -Path $hallmarkSkillDest -Value $hallmarkSkillSrc | Out-Null
         Write-Host "  -> Linked Hallmark Skill" -ForegroundColor Green
     }
-
-    # Link EGM skills
-    $egmSkillsSrc = Join-Path $TargetDir "packages\elephant-goldfish-model\skills"
-    if (Test-Path $egmSkillsSrc) {
-        Get-ChildItem -Directory $egmSkillsSrc | ForEach-Object {
-            $destPath = Join-Path $GlobalSkillsDir $_.Name
-            if (-not (Test-Path $destPath)) {
-                New-Item -ItemType Junction -Path $destPath -Value $_.FullName | Out-Null
-                Write-Host "  -> Linked EGM Skill: $($_.Name)" -ForegroundColor Green
-            }
-        }
-    }
 } else {
     Write-Host "[3/3] Global skills directory not found. Packages installed locally in $TargetDir." -ForegroundColor Gray
 }
@@ -73,9 +61,8 @@ Write-Host ""
 Write-Host "==========================================" -ForegroundColor Green
 Write-Host "Installation completed successfully! ⭐" -ForegroundColor Green
 Write-Host "==========================================" -ForegroundColor Green
-Write-Host "Engines ready:"
-Write-Host "  - 84 Design Systems (awesome-design-md)"
+Write-Host "UI/UX Engines ready:"
+Write-Host "  - 84 Brand Design Systems (awesome-design-md)"
 Write-Host "  - Anti-AI-Slop & Anatomy Engine (hallmark)"
 Write-Host "  - Offline Design Intelligence & BM25 (ui-ux-pro-max-skill)"
-Write-Host "  - Spec Architecture & Review Loop (elephant-goldfish-model)"
 Write-Host ""
